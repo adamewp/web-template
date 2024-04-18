@@ -728,8 +728,13 @@ const validListingFields = (listingFields, listingTypesInUse, categoriesInUse) =
   }, []);
 };
 
-const getUserTypeStringsInUse = userTypes => {
-  return userTypes.map(ut => `${ut.userType}`);
+const validUserTypes = userTypes => {
+  const validTypes = userTypes.filter(config => {
+    const { userType, label } = config;
+    return userType && label;
+  });
+
+  return validTypes;
 };
 
 const validUserFields = (userFields, userTypesInUse) => {
@@ -782,10 +787,6 @@ const validUserFields = (userFields, userTypesInUse) => {
 ///////////////////////////////////
 // Validate listing types config //
 ///////////////////////////////////
-
-const getListingTypeStringsInUse = listingTypes => {
-  return listingTypes.map(lt => `${lt.listingType}`);
-};
 
 const validListingTypes = listingTypes => {
   // Check what transaction processes this client app supports
@@ -916,6 +917,13 @@ const restructureListingFields = hostedListingFields => {
 ///////////////////////////////////////
 // Restructure hosted user config //
 ///////////////////////////////////////
+
+const restructureUserTypes = (hostedUserTypes = []) => {
+  return hostedUserTypes.map(userType => {
+    const { id, ...rest } = userType;
+    return { userType: id, ...rest };
+  });
+};
 
 const restructureUserFields = hostedUserFields => {
   return (
@@ -1057,7 +1065,7 @@ const mergeListingConfig = (hostedConfig, defaultConfigs, categoriesInUse) => {
     ? union(hostedListingFields, defaultListingFields, 'key')
     : hostedListingFields;
 
-  const listingTypesInUse = getListingTypeStringsInUse(listingTypes);
+  const listingTypesInUse = listingTypes.map(lt => `${lt.listingType}`);
 
   return {
     ...rest,
@@ -1068,6 +1076,7 @@ const mergeListingConfig = (hostedConfig, defaultConfigs, categoriesInUse) => {
 };
 
 const mergeUserConfig = (hostedConfig, defaultConfigs) => {
+  const hostedUserTypes = restructureUserTypes(hostedConfig?.userTypes?.userTypes);
   const hostedUserFields = restructureUserFields(hostedConfig?.userFields?.userFields);
 
   const { userFields: defaultUserFields, userTypes: defaultUserTypes } = defaultConfigs.user;
@@ -1075,19 +1084,19 @@ const mergeUserConfig = (hostedConfig, defaultConfigs) => {
   // When debugging, include default configs by passing 'true' here.
   // Otherwise, use user fields from hosted assets.
   const shouldMerge = mergeDefaultTypesAndFieldsForDebugging(false);
+  const userTypes = shouldMerge
+    ? union(hostedUserTypes, defaultUserTypes, 'userType')
+    : hostedUserTypes;
   const userFields = shouldMerge
     ? union(hostedUserFields, defaultUserFields, 'key')
     : hostedUserFields;
 
   // To include user type validation (if you have user types in your default configuration),
   // pass userTypes to the validUserFields function as well:
-  // const userTypes = getUserTypeStringsInUse(defaultUserTypes);
-  // return {
-  //   userFields: validUserFields(userFields, userTypes)
-  // };
-
+  const userTypesInUse = userTypes.map(ut => `${ut.userType}`);
   return {
-    userFields: validUserFields(userFields),
+    userTypes: validUserTypes(userTypes),
+    userFields: validUserFields(userFields, userTypesInUse),
   };
 };
 
