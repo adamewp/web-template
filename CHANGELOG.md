@@ -14,6 +14,7 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2024-XX-XX
 
+- [add] support for extended data fields with type `long` [#364](https://github.com/sharetribe/web-template/pull/364)
 - [fix] util/search.js: fix pickInitialValuesForFieldSelectTree.
   [#369](https://github.com/sharetribe/web-template/pull/369)
 
