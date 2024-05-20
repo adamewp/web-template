@@ -38,7 +38,7 @@ module.exports = (req, res) => {
   const sdk = sdkUtils.getSdk(req, res);
 
   sdk
-    .login({
+    .loginAs({
       code,
       redirect_uri: loginAsRedirectUri,
       code_verifier: codeVerifier,
