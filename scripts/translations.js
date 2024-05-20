@@ -65,7 +65,7 @@ const targetLangChoices = () => {
         value: code,
       };
     });
-
+  choices.psuh({ name: 'Swedish', value: 'sv' });
   return choices;
 };
 
