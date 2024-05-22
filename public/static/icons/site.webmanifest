@@ -1,21 +1,20 @@
 {
-    "name": "Biketribe",
-    "short_name": "Biketribe",
-    "start_url": "/",
-    "display": "standalone",
-    "theme_color": "#ffffff",
-    "background_color": "#ffffff",
+    "name": "Top Notch Club",
+    "short_name": "Top Notch Club",
     "icons": [
-      {
-        "src": "/static/icons/android-chrome-192x192.png",
-        "sizes": "192x192",
-        "type": "image/png"
-      },
-      {
-          "src": "/static/icons/android-chrome-512x512.png",
-          "sizes": "512x512",
-          "type": "image/png"
-      }
-    ]
-  }
-  
+        {
+            "src": "/static/icons/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/static/icons/android-chrome-256x256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#2ecc71",
+    "background_color": "#2ecc71",
+    "start_url": "members.topnotchclub.com",
+    "display": "standalone"
+}
