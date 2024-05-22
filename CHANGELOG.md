@@ -14,6 +14,22 @@ way to update this template, but currently, we follow a pattern:
 
 ## Upcoming version 2024-XX-XX
 
+## [v5.1.0] 2024-05-21
+
+- [add] support for extended data fields with type `long`
+  [#364](https://github.com/sharetribe/web-template/pull/364)
+- [change] the login-as feature has changed:
+
+  - Use `sdk.loginAs` instead of `sdk.login`, which is deprecated for this purpose
+  - Use `authInfo.isLoggedInAs` instead of relying on auth token's `scope` to determine if current
+    session is operator user logged in as marketplace user.
+  - Note: when taking update from upstream, check also commit be7e2b9b4.
+
+  [#386](https://github.com/sharetribe/web-template/pull/386)
+
+- [fix] the email template for default-purchase process
+  (purchase-order-canceled-from-disputed-provider-html.html) contained copy-paste related typo.
+  [#390](https://github.com/sharetribe/web-template/pull/389)
 - [add] Autolink text on the UI. Those links must start with 'http' to be recognized.
 
   - ListingPage > Listing's description
@@ -38,6 +54,9 @@ way to update this template, but currently, we follow a pattern:
   [#381](https://github.com/sharetribe/web-template/pull/381)
 - [fix] Styleguide shows multiple versions of some components. The 'id' attributes need to be
   unique. [#380](https://github.com/sharetribe/web-template/pull/380)
+- [change] Update SDK to v1.21.0 [#386](https://github.com/sharetribe/web-template/pull/386)
+
+  [v5.1.0]: https://github.com/sharetribe/web-template/compare/v5.0.1...v5.1.0
 
 ## [v5.0.1] 2024-04-30
 
