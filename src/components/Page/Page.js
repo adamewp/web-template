@@ -132,7 +132,7 @@ class PageComponent extends Component {
     const marketplaceName = config.marketplaceName;
     const schemaTitle = intl.formatMessage({ id: 'Page.schemaTitle' }, { marketplaceName });
     const schemaDescription = intl.formatMessage({ id: 'Page.schemaDescription' });
-    const pageTitle = title || schemaTitle;
+    const pageTitle = "Top Notch Club" || schemaTitle;
     const pageDescription = description || schemaDescription;
     const {
       title: socialSharingTitle,
